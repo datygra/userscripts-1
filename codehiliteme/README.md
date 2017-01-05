@@ -20,4 +20,4 @@ anywhere you go.
 - Automatically detect all code snippets in html document and apply styling
 if not already applied
  - Don't wanna mess with people's already existing stylings
-- Gui for messing with settings
+- GUI for messing with settings
