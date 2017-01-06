@@ -22,6 +22,7 @@ HLJS_LANGS = set(
         console.log(hljs.listLanguages().join(" "));"""
     ]).decode().split())
 
+
 def main():
     ext_patt = re.compile(r'((?:\w*?\.?)[-+\w]+)$')
 
@@ -80,7 +81,11 @@ def main():
                 'ext'] + extension_mapper[lang]['special']
         }
 
-        json.dump(inverse_mapping, fp=json_file, indent=4, sort_keys=True)
+        json.dump(
+            inverse_mapping,
+            fp=json_file,
+            sort_keys=True,
+            separators=(',',':'))
 
 
 if __name__ == '__main__':
