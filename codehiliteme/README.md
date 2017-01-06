@@ -9,10 +9,11 @@ anywhere you go.
 
 ## Installation
 - Install [TamperMonkey](https://tampermonkey.net/) for your browser, or any derivative of greasemonkey
-- Download the script
+- [Download](https://raw.githubusercontent.com/smac89/userscripts/master/codehiliteme/CodeHiliteMe.user.js) the script
 - Enable and enjoy!
 
 ## Future plans/maybe...
+- Strip off any get parameters to further determine if the file loaded is code
 - Ability to choose different styles rather than the default
 - Ability to choose styles based on language
 - Code formatting ([Clang Format](http://clang.llvm.org/docs/ClangFormat.html))

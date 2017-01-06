@@ -1,24 +1,30 @@
 // ==UserScript==
+// @namespace    https://github.com/smac89
+
 // @name         Code HiliteMe
-// @namespace    http://tampermonkey.net/
-// @version      0.1
+// @name:en      Code HiliteMe
+
 // @description  Beautiful code everywhere!
+
 // @author       smac89
-// @include      */*
+// @version      0.1
+// @license      GPLv3
+
+// @supportURL   https://github.com/smac89/userscripts/issues
+// @homepageURL  https://github.com/smac89/userscripts/tree/master/codehiliteme
+
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js
-// @require      https://raw.githubusercontent.com/smac89/userscripts/master/codehiliteme/highlight.js/build/highlight.min.js
-// @run-at       document-end
+// @require      https://greasyfork.org/scripts/26342-highlight-js/code/Highlightjs.js?version=167883
+
 // @resource     hljs.css    https://raw.githubusercontent.com/smac89/userscripts/master/codehiliteme/highlight.js/build/styles/default.min.css
 // @resource     langs.json  https://raw.githubusercontent.com/smac89/userscripts/master/codehiliteme/supported_langs.json
 // @resource     ovride.css  https://raw.githubusercontent.com/smac89/userscripts/master/codehiliteme/override.css
+
+// @include      */*
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
+// @run-at       document-start
 // ==/UserScript==
-
-/* NOTES
-* https://greasyfork.org/en/help/meta-keys
-* https://highlightjs.org/static/demo/
-*/
 
 
 // Give the option of customizing the output to use the browser's built-in pretty printer
