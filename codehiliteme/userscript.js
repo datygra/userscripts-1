@@ -10,6 +10,7 @@
 // @run-at       document-end
 // @resource     hljs.css    https://raw.githubusercontent.com/smac89/userscripts/master/codehiliteme/highlight.js/build/styles/default.min.css
 // @resource     langs.json  https://raw.githubusercontent.com/smac89/userscripts/master/codehiliteme/supported_langs.json
+// @resource     ovride.css  https://raw.githubusercontent.com/smac89/userscripts/master/codehiliteme/override.css
 // @grant        GM_xmlhttpRequest
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
@@ -20,38 +21,33 @@
 * https://highlightjs.org/static/demo/
 */
 
-
-// Give the option of customizing the output to use the browser's built-in pretty printer
-var STYLE_OPTIONS =  {
-    style: "None",
-    linenos: false
-};
-
+// Give the option of customizing the output to use the browser's built-in
+// pretty printer
+var STYLE_OPTIONS = {style : "None", linenos : false};
 
 var CodeHiliteMe = (function() {
-    const _private = this;
+    const _private      = this;
     const extension_map = $.parseJSON(GM_getResourceText("langs.json"));
 
-    // Add the highlight js stylesheet
-    GM_addStyle(GM_getResourceText('hljs.css'));
-
     return {
-        hiliteit: function() {
+        hiliteit : function() {
             $('pre code').each(function(i, block) {
                 hljs.highlightBlock(block);
             });
         },
 
-        ishilitable: function() {
-            var $code = $("body > pre:first-child");
+        ishilitable : function() {
+            var $code    = $("body > pre:first-child");
             var filename = window.location.href.split("/").pop().toLowerCase();
 
             if ($code.exists() && filename) {
 
-                var ext = filename.substr(filename.lastIndexOf('.')).toLowerCase();
+                var ext =
+                    filename.substr(filename.lastIndexOf('.')).toLowerCase();
                 var language = '';
 
-                // if the extension is not found, then attempt to treat the file as a special file
+                // if the extension is not found, then attempt to treat the file
+                // as a special file
                 if (ext in extension_map) {
                     language = extension_map[ext];
                 } else if (filename in extension_map) {
@@ -61,7 +57,8 @@ var CodeHiliteMe = (function() {
                 }
 
                 var text = $code.text();
-                $code.replaceWith(`<pre><code class="${language}"></code></pre>`);
+                $code.replaceWith(
+                    `<pre><code class="${language}"></code></pre>`);
                 $('code').text(text);
 
                 return true;
@@ -75,16 +72,20 @@ $(function() {
     'use strict';
 
     if (CodeHiliteMe.ishilitable()) {
+        // Add the highlight js stylesheet
+        GM_addStyle(GM_getResourceText('hljs.css'));
+        GM_addStyle(GM_getResourceText('ovride.css'));
+
+        // highlight the code
         CodeHiliteMe.hiliteit();
     }
 });
 
 $.fn.extend({
-    exists: function() {
+    exists : function() {
         return this.length !== 0;
     }
 });
-
 
 // GM_xmlhttpRequest({
 //     url: window.location.href,
@@ -129,7 +130,8 @@ $.fn.extend({
 //     }
 // });
 
-// var blob = new Blob([$.parseHTML(`<pre><div class="${language}">${$code.text()}</div></pre>`).join("")], {
+// var blob = new Blob([$.parseHTML(`<pre><div
+// class="${language}">${$code.text()}</div></pre>`).join("")], {
 //     type: 'text/html',
 //     endings: 'native'
 // });
