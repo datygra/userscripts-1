@@ -18,7 +18,7 @@ GITHUB_LINGUIST_LANGUAGES_URL = \
 HLJS_LANGS = set(
     subprocess.check_output([
         "node", "-e",
-        """const hljs = require('./highlight.js/build/highlight.min.js');
+        """const hljs = require('./highlight.js/build/highlight.js');
         console.log(hljs.listLanguages().join(" "));"""
     ]).decode().split())
 

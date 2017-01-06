@@ -5,3 +5,4 @@ highlight.js/*
 !highlight.js/build/
 .vscode/
 *.yml
+REMINDERS.txt
