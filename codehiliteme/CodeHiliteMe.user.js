@@ -36,7 +36,6 @@ var CodeHiliteMe = (function() {
         var $code = $('pre code'), elem = $code.get(0);
 
         if (elem.offsetWidth < elem.scrollWidth) {
-            console.log(`Off height: ${elem.offsetHeight}, scroll Height: ${elem.scrollHeight}`);
             $('pre:first-child').css({
                 display: 'inline-block'
             });
