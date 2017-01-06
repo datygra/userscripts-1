@@ -1,6 +1,7 @@
 tags
-!node_modules/
-node_modules/*
-!node_modules/highlight.js/
+node_modules/
+!highlight.js/
+highlight.js/*
+!highlight.js/build/
 .vscode/
 *.yml
