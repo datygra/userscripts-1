@@ -12,8 +12,15 @@ anywhere you go.
 - [Download](https://greasyfork.org/scripts/26343-code-hiliteme/code/Code%20HiliteMe.user.js) the script
 - Enable and enjoy!
 
+## Common issues
+- **It does not highlight local files, i.e. not running on non-webserver location, like "file:///..."**
+ - This is not an issue with the script, but rather the extension. Depending on the extension you use,
+ you will have to search for a way to allow the extension to have access to file urls. For TamperMonkey, the solution
+ is [here](http://tampermonkey.net/faq.php#Q204).
+
+
 ## Future plans/maybe...
-- Strip off any http GET (?x=y&v=k) parameters to further determine if the file loaded is code
+- ~~Strip off any http GET (?x=y&v=k) parameters to further determine if the file loaded is code~~
 - Ability to choose different styles rather than the default
 - Ability to choose styles based on language
 - Code formatting ([Clang Format](http://clang.llvm.org/docs/ClangFormat.html))

@@ -7,7 +7,7 @@
 // @description  Beautiful code everywhere!
 
 // @author       smac89
-// @version      0.1
+// @version      0.1.1
 // @license      GPLv3
 
 // @supportURL   https://github.com/smac89/userscripts/issues
@@ -64,7 +64,7 @@ var CodeHiliteMe = (function() {
 
         ishilitable: function() {
             var $code = $("body > pre:first-child");
-            var filename = window.location.href.split("/").pop().toLowerCase();
+            var filename = window.location.pathname.split("/").pop().toLowerCase();
 
             if ($code.exists() && filename) {
 
