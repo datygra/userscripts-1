@@ -55,6 +55,9 @@ def main():
                 extension_mapper[accepted] = set()
             extension_mapper[accepted] |= set(gh_data[lang]['extensions'])
 
+            if 'filenames' in gh_data[lang]:
+                extension_mapper[accepted] |= set(gh_data[lang]['filenames'])
+
     extension_mapper.update({
         # item[0]: {
         #     'ext': list(item[1])
