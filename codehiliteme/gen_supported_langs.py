@@ -38,7 +38,8 @@ def main():
         for lexer in pyg_data if lexer[0].lower() in HLJS_LANGS
     }
 
-    gh_data['C#']['aliases'].append('cs')
+    add_alias_for('C#', 'cs', gh_data)
+    add_alias_for('C', 'cpp', gh_data)
 
     for lang in gh_data:
         accepted = ''
@@ -85,7 +86,20 @@ def main():
             inverse_mapping,
             fp=json_file,
             sort_keys=True,
-            separators=(',',':'))
+            separators=(',', ':'))
+
+
+def add_alias_for(lang, alias, mapper):
+    """
+    Given a language which is not being added to the supported langs,
+    create an alias for that language using a language which is recognized
+    by highlight.js.
+
+    What this means is that anywhere that a source file written in that language
+    is found, the highlighting for the alias is used instead 
+    """
+    alias_list = mapper[lang].setdefault('aliases', [])
+    alias_list.append(alias)
 
 
 if __name__ == '__main__':

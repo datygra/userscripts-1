@@ -8,7 +8,7 @@ Gone are the days of black and white code, now you can take that colorful look y
 anywhere you go.
 
 ## Installation
-- Install [TamperMonkey](https://tampermonkey.net/) for your browser, or any derivative of greasemonkey
+- Install [TamperMonkey](https://tampermonkey.net/) for your browser, or any derivative of greasemonkey. If you need help, look [here](https://greasyfork.org/en/help/installing-user-scripts)
 - [Download](https://greasyfork.org/scripts/26343-code-hiliteme/code/Code%20HiliteMe.user.js) the script
 - Enable and enjoy!
 
