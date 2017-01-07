@@ -7,7 +7,7 @@
 // @description  Beautiful code everywhere!
 
 // @author       smac89
-// @version      0.1.2
+// @version      0.1.3
 // @license      GPLv3
 
 // @supportURL   https://github.com/smac89/userscripts/issues
@@ -47,25 +47,18 @@ var CodeHiliteMe = (function() {
         var $code = $('body > pre code'), elem = $code.get(0);
 
         if (elem.offsetWidth < elem.scrollWidth) {
-            $('body > pre').css({
-                display: 'inline-block'
-            });
+            $('body > pre').css('display', 'inline-block');
         } else {
-            $('body > pre').css({
-                display: 'block'
-            });
+            $('body > pre').css('display', 'block');
         }
     }
 
     function drawLines(block) {
         var $code = $(block);
 
-        var $numb = $("<div></div>", {
+        $("<div></div>", {
             html: $.parseHTML($code.text().split(/\n|\r\n?/).map(function(line, index, array) {
-                if (index + 1 === array.length) {
-                    if (line) {
-                        return "" + (index + 1);
-                    }
+                if (index + 1 === array.length && !line) {
                     return "";
                 }
                 return (index + 1) + "<br>";
@@ -73,27 +66,27 @@ var CodeHiliteMe = (function() {
 
             css: {
                 'float': 'left',
-                'font-weight': 'bold',
-                'padding-right': '0.1em'
+                'font-weight': 'bold'
             },
 
             addClass: 'hljs',
-            insertBefore: $code,
+            insertBefore: $code.css('display', 'inline-block'), // inline-block is used to avoid having to have two scrollbars when the window is shrunk
             id: "code-lines"
         });
     }
 
     return {
         hiliteIt: function() {
-            $('pre code').each(function(i, block) {
+            var $codes = $('pre code').each(function(i, block) {
+                hljs.highlightBlock(block);
                 if (OPT.linenos) {
                     drawLines(block);
                 }
-                hljs.highlightBlock(block);
-            }).css({
-                // Used to prevent two scroll bars due to the line numbers
-                'overflow-x': 'hidden'
             });
+
+            if (OPT.linenos) {
+                $codes.parent().css('background', $('.hljs').css('background'));
+            }
 
             layout();
             $(window).resize(layout);
