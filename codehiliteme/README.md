@@ -24,7 +24,7 @@ anywhere you go.
 - Ability to choose different styles rather than the default
 - Ability to choose styles based on language
 - Code formatting ([Clang Format](http://clang.llvm.org/docs/ClangFormat.html))
-- Toggle line numbers
+- ~~Toggle line numbers~~
 - Automatically detect all code snippets in html document and apply styling
 if not already applied
  - Don't wanna mess with people's already existing stylings

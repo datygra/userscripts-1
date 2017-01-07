@@ -7,7 +7,7 @@
 // @description  Beautiful code everywhere!
 
 // @author       smac89
-// @version      0.1.1
+// @version      0.1.2
 // @license      GPLv3
 
 // @supportURL   https://github.com/smac89/userscripts/issues
@@ -24,13 +24,18 @@
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
 // @run-at       document-start
+
+// @compatible   firefox(50.1.0)+greasemonkey
+// @compatible   chrome(55.0.2883.87)+tampermonkey
+// @compatible   opera(43.0.2442.7)+violentmonkey
+// @compatible   yandex(17.1.1.266 beta)+violentmonkey
 // ==/UserScript==
 
 
 // Give the option of customizing the output to use the browser's built-in pretty printer
-var STYLE_OPTIONS =  {
+var OPT =  {
     style: "None",
-    linenos: false
+    linenos: true
 };
 
 
@@ -39,30 +44,62 @@ var CodeHiliteMe = (function() {
     const extension_map = $.parseJSON(GM_getResourceText("langs.json"));
 
     function layout() {
-        var $code = $('pre code'), elem = $code.get(0);
+        var $code = $('body > pre code'), elem = $code.get(0);
 
         if (elem.offsetWidth < elem.scrollWidth) {
-            $('pre:first-child').css({
+            $('body > pre').css({
                 display: 'inline-block'
             });
         } else {
-            $('pre:first-child').css({
+            $('body > pre').css({
                 display: 'block'
             });
         }
     }
 
+    function drawLines(block) {
+        var $code = $(block);
+
+        var $numb = $("<div></div>", {
+            html: $.parseHTML($code.text().split(/\n|\r\n?/).map(function(line, index, array) {
+                if (index + 1 === array.length) {
+                    if (line) {
+                        return "" + (index + 1);
+                    }
+                    return "";
+                }
+                return (index + 1) + "<br>";
+            }).join("")),
+
+            css: {
+                'float': 'left',
+                'font-weight': 'bold',
+                'padding-right': '0.1em'
+            },
+
+            addClass: 'hljs',
+            insertBefore: $code,
+            id: "code-lines"
+        });
+    }
+
     return {
-        hiliteit: function() {
+        hiliteIt: function() {
             $('pre code').each(function(i, block) {
+                if (OPT.linenos) {
+                    drawLines(block);
+                }
                 hljs.highlightBlock(block);
+            }).css({
+                // Used to prevent two scroll bars due to the line numbers
+                'overflow-x': 'hidden'
             });
 
             layout();
             $(window).resize(layout);
         },
 
-        ishilitable: function() {
+        isHilitable: function() {
             var $code = $("body > pre:first-child");
             var filename = window.location.pathname.split("/").pop().toLowerCase();
 
@@ -94,13 +131,13 @@ var CodeHiliteMe = (function() {
 $(function() {
     'use strict';
 
-    if (CodeHiliteMe.ishilitable()) {
+    if (CodeHiliteMe.isHilitable()) {
         // Add the highlight js stylesheet
         GM_addStyle(GM_getResourceText('hljs.css'));
         GM_addStyle(GM_getResourceText('ovride.css'));
 
         // highlight the code
-        CodeHiliteMe.hiliteit();
+        CodeHiliteMe.hiliteIt();
     }
 });
 
